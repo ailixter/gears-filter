@@ -1,0 +1,21 @@
+{
+    "name": "ailixter/gears-filter",
+    "description": "The project, which gears Filter functions.",
+    "authors": [
+        {
+            "name": "ailixter",
+            "email": "ailixter@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ailixter\\Gears\\Filter\\":  "src/",
+            "Ailixter\\Gears\\Example\\": "example/"
+        }
+    },
+
+    "config" : {
+        "optimize-autoloader": true
+    },
+    "require": {}
+}
