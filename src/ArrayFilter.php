@@ -6,6 +6,9 @@
 
 namespace Ailixter\Gears\Filter;
 
+use Ailixter\Gears\Exceptions\MethodException;
+use InvalidArgumentException;
+
 /**
  * @author AII (Alexey Ilyin)
  */
@@ -57,12 +60,10 @@ class ArrayFilter
     public function __call($name, $arguments)
     {
         if (\sscanf(\strtolower($name), 'get%s', $type) <= 0) {
-            throw new \RuntimeException(
-                "unsupported method: '$name'"
-            );
+            throw MethodException::forCall($this, $name);
         }
         if (!count($arguments)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 "ArgumentCountError: Too few arguments to function '$name'"
             );
         }

@@ -110,7 +110,7 @@ class ArrayFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException \Ailixter\Gears\Exceptions\MethodException
      */
     public function testUnsupported()
     {

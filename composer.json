@@ -17,5 +17,15 @@
     "config" : {
         "optimize-autoloader": true
     },
-    "require": {}
+
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/ailixter/gears.git"
+        }
+    ],
+
+    "require": {
+        "ailixter/gears": "master-dev"
+    }
 }
