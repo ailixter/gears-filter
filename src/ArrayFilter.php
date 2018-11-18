@@ -78,6 +78,11 @@ class ArrayFilter
      */
     public function castAll($casts)
     {
-        return $this->filter->castArray($casts, $this->data, true);
+        return $this->filter->castArray($casts, $this->dataArray(), true);
+    }
+
+    protected function dataArray()
+    {
+        return (array)$this->data;
     }
 }
