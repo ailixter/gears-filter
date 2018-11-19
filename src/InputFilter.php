@@ -9,7 +9,7 @@ namespace Ailixter\Gears\Filter;
 /**
  * @author AII (Alexey Ilyin)
  */
-class ArrayFilter extends AbstractDataFilter
+class InputFilter extends AbstractDataFilter
 {
     /**
      * Get $key as $type.
@@ -21,7 +21,7 @@ class ArrayFilter extends AbstractDataFilter
      */
     public function get($type, $key, $default = null)
     {
-        return $this->filter->castItem($type, $this->data, $key, $default);
+        return $this->filter->castInput($type, $this->data, $key, $default);
     }
     /**
      * @param iterable $casts
@@ -29,11 +29,6 @@ class ArrayFilter extends AbstractDataFilter
      */
     public function castAll($casts)
     {
-        return $this->filter->castArray($casts, $this->dataArray(), true);
-    }
-
-    protected function dataArray()
-    {
-        return (array)$this->data;
+        return $this->filter->castInputArray($casts, $this->data, true);
     }
 }

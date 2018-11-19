@@ -31,3 +31,12 @@ $custom = $array->getCustomType('a');
 $all = $array->castAll(['a' => 'float', 'b' => 'bool', 'undefined' => 'str']);
 ```
 
+Utility Filter-based class InputFilter
+``` php
+$post = new InputFilter(INPUT_POST, new Filter);
+$bool = $post->get('bool', 'b');
+$float = $post->getFloat('a', 0.0);
+$custom = $post->getCustomType('a');
+$all = $post->castAll(['a' => 'float', 'b' => 'bool', 'undefined' => 'str']);
+```
+
