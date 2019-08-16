@@ -6,6 +6,8 @@
 
 namespace Ailixter\Gears\Filter;
 
+use InvalidArgumentException;
+
 /**
  * @author AII (Alexey Ilyin)
  */
@@ -36,7 +38,7 @@ class Filter
      *  - str
      * @param iterable $formats - follows filter specifications.
      */
-    public function __construct($formats = false)
+    public function __construct(array $formats = [])
     {
         if ($formats) {
             foreach ($formats as $key => $value) {
@@ -45,7 +47,7 @@ class Filter
         }
     }
 
-    protected function makeDescriptor($type, $default = null)
+    protected function makeDescriptor($type, $default = null): array
     {
         if (is_int($type)) {
             // simple filter
@@ -57,7 +59,7 @@ class Filter
             // pre-configured filter
             $result = $this->formats[(string)$type];
         } else {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 "undefined cast: '$type'"
             );
         }
@@ -69,7 +71,7 @@ class Filter
         return $result;
     }
 
-    protected function makeFilterOptions($type, $default)
+    protected function makeFilterOptions($type, $default): array
     {
         $descr = $this->makeDescriptor($type, $default);
         $filter = $descr['filter'];
@@ -86,12 +88,12 @@ class Filter
      *  $int2 = $filter->cast(['filter'=>FILTER_VALIDATE_INT, 'flags'=>...], '123');
      *  $int3 = $filter->cast('int', '123');
      * </code>
-     * 
+     *
      * @param mixed $type
      * @param mixed $var
      * @param mixed $default
      * @return mixed
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function cast($type, $var, $default = null)
     {
@@ -109,7 +111,7 @@ class Filter
      *  $int2 = $filter->castItem(['filter'=>FILTER_VALIDATE_INT, 'flags'=>...], $arr, 'a');
      *  $int3 = $filter->castItem('int', $arr, 'a');
      * </code>
-     * 
+     *
      * @param mixed  $type
      * @param array  $array
      * @param scalar $key
@@ -131,7 +133,7 @@ class Filter
      *  $int2 = $filter->castInput(['filter'=>FILTER_VALIDATE_INT, 'flags'=>...], INPUT_POST, 'p');
      *  $int3 = $filter->castInput('int', INPUT_POST, 'p');
      * </code>
-     * 
+     *
      * @param mixed $type
      * @param int $input
      * @param scalar $key
@@ -144,8 +146,8 @@ class Filter
         list($filter, $options) = $this->makeFilterOptions($type, $default);
         return filter_input($input, $key, $filter, $options);
     }
-    
-    protected function makeDescriptorArray($casts)
+
+    protected function makeDescriptorArray($casts): array
     {
         $result = [];
         foreach ($casts as $key => $type) {
@@ -156,13 +158,13 @@ class Filter
 
     /**
      * Casts array-to-array.
-     * 
+     *
      * <code>
      *  $filter = new Filter;
      *  $arr = ['a' => '123'];
      *  $int = $filter->castArray(['a' => 'int'], $arr);
      * </code>
-     * 
+     *
      * @param iterable $casts - array of casts (see cast()) by key names.
      * @param array $array
      * @param bool $addEmpty
@@ -176,12 +178,12 @@ class Filter
 
     /**
      * Casts input into array.
-     * 
+     *
      * <code>
      *  $filter = new Filter;
      *  $int = $filter->castInputArray(['p' => 'int'], INPUT_POST);
      * </code>
-     * 
+     *
      * @param iterable $casts
      * @param int $input
      * @param bool $addEmpty

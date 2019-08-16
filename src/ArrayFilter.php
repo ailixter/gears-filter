@@ -17,7 +17,7 @@ class ArrayFilter extends AbstractDataFilter
      * @param scalar $key
      * @param mixed  $default
      * @return mixed
-     * 
+     *
      */
     public function get($type, $key, $default = null)
     {
@@ -27,7 +27,7 @@ class ArrayFilter extends AbstractDataFilter
      * @param iterable $casts
      * @return array
      */
-    public function castAll($casts)
+    public function castAll($casts): array
     {
         return $this->filter->castArray($casts, $this->dataArray(), true);
     }

@@ -32,31 +32,31 @@ abstract class AbstractDataFilter
      * @param scalar $key
      * @param mixed  $default
      * @return mixed
-     * 
+     *
      */
     abstract public function get($type, $key, $default = null);
     /**
      * @param iterable $casts
      * @return array
      */
-    abstract public function castAll($casts);
+    abstract public function castAll($casts): array;
 
-    public function getInt($key, $default = null)
+    public function getInt($key, $default = null): int
     {
         return $this->get('int', $key, $default);
     }
 
-    public function getFloat($key, $default = null)
+    public function getFloat($key, $default = null): float
     {
         return $this->get('float', $key, $default);
     }
 
-    public function getBool($key, $default = null)
+    public function getBool($key, $default = null): bool
     {
         return $this->get('bool', $key, $default);
     }
 
-    public function getStr($key, $default = null)
+    public function getStr($key, $default = null): string
     {
         return $this->get('str', $key, $default);
     }
